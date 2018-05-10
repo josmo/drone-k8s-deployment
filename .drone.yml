@@ -1,0 +1,72 @@
+workspace:
+  base: /go
+  path: src/github.com/josmo/drone-k8s-deployment
+pipeline:
+  test:
+    image: golang:1.9
+    commands:
+      - go vet
+      - go test -cover -coverprofile=coverage.out
+
+  build_linux_amd64:
+    image: golang:1.9
+    group: build
+    environment:
+      - GOOS=linux
+      - GOARCH=amd64
+      - CGO_ENABLED=0
+    commands:
+      - go build -v -ldflags "-X main.build=${DRONE_BUILD_NUMBER}" -a -o release/linux/amd64/drone-k8s-deployment
+
+  build_linux_arm64:
+    image: golang:1.9
+    group: build
+    environment:
+      - GOOS=linux
+      - GOARCH=arm64
+      - CGO_ENABLED=0
+    commands:
+      - go build -v -ldflags "-X main.build=${DRONE_BUILD_NUMBER}" -a -o release/linux/arm64/drone-k8s-deployment
+
+  build_linux_arm:
+    image: golang:1.9
+    group: build
+    environment:
+      - GOOS=linux
+      - GOARCH=arm
+      - CGO_ENABLED=0
+      - GOARM=7
+    commands:
+      - go build -v -ldflags "-X main.build=${DRONE_BUILD_NUMBER}" -a -o release/linux/arm/drone-k8s-deployment
+
+  publish_linux_amd64:
+    image: plugins/docker
+    username: josmo
+    repo: peloton/drone-k8s-deployment
+    auto_tag: true
+    secrets: [ docker_password ]
+    dockerfile: Dockerfile
+    when:
+      event: [ tag, push ]
+
+  publish_linux_arm64:
+    image: plugins/docker
+    username: josmo
+    repo: peloton/drone-k8s-deployment
+    auto_tag: true
+    auto_tag_suffix: linux-arm64
+    secrets: [ docker_password ]
+    dockerfile: Dockerfile.arm64
+    when:
+      event: [ tag, push ]
+
+  publish_linux_arm:
+    image: plugins/docker
+    username: josmo
+    repo: peloton/drone-k8s-deployment
+    auto_tag: true
+    auto_tag_suffix: linux-arm
+    secrets: [ docker_password ]
+    dockerfile: Dockerfile.arm
+    when:
+      event: [ tag, push ]
