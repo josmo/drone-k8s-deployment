@@ -34,20 +34,20 @@ func main() {
 			Usage:  "Insecure connection",
 			EnvVar: "PLUGIN_INSECURE",
 		},
-		cli.StringFlag{
-			Name:   "deployment-name",
-			Usage:  "K8s deployment name",
-			EnvVar: "PLUGIN_DEPLOYMENT_NAME",
+		cli.StringSliceFlag{
+			Name:   "deployment-names",
+			Usage:  "K8s deployment names",
+			EnvVar: "PLUGIN_DEPLOYMENT_NAMES",
 		},
-		cli.StringFlag{
-			Name:   "container-name",
-			Usage:  "K8s container name for the deployment",
-			EnvVar: "PLUGIN_CONTAINER_NAME",
+		cli.StringSliceFlag{
+			Name:   "container-names",
+			Usage:  "K8s container names for the deployment",
+			EnvVar: "PLUGIN_CONTAINER_NAMES",
 		},
-		cli.StringFlag{
-			Name:   "namespace",
-			Usage:  "K8s deployment namspace",
-			EnvVar: "PLUGIN_NAMESPACE",
+		cli.StringSliceFlag{
+			Name:   "namespaces",
+			Usage:  "K8s deployment namspaces",
+			EnvVar: "PLUGIN_NAMESPACES",
 		},
 		cli.StringFlag{
 			Name:   "docker-image",
@@ -66,9 +66,9 @@ func run(c *cli.Context) error {
 		URL:            c.String("url"),
 		Token:          c.String("token"),
 		Insecure:       c.Bool("insecure"),
-		DeploymentName: c.String("deployment-name"),
-		ContainerName:  c.String("container-name"),
-		NameSpace:      c.String("namespace"),
+		DeploymentNames: c.StringSlice("deployment-names"),
+		ContainerNames:  c.StringSlice("container-names"),
+		NameSpaces:      c.StringSlice("namespaces"),
 		DockerImage:    c.String("docker-image"),
 	}
 	return plugin.Exec()

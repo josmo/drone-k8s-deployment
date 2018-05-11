@@ -21,10 +21,27 @@ deploy:
     url: https://k8s.server/
     token: asldkfj
     insecure: false
-    deployment_name: mything
-    container_name: mything
-    namespace: mynamespace
+    deployment_names: mything
+    container_names: mything
+    namespaces: mynamespace
     docker_image: drone/drone:latest
 ```
+
+Or with multiples
+
+```yaml
+deploy:
+  k8s-deployment:
+    image: peloton/drone-k8s-deployment
+    url: https://k8s.server/
+    token: asldkfj
+    insecure: false
+    deployment_names: [mything, mything2]
+    container_names: mything
+    namespaces: [mynamespace, anothernamspace]
+    docker_image: drone/drone:latest
+```
+
+It's not recommended to update multiples of namespaces, deployment_names, and conatiner_names.  Try to keep things simple.
 
 if you want to add secrets for the token it's KUBERNETES_TOKEN

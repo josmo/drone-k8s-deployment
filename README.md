@@ -24,9 +24,9 @@ docker run --rm                          \
   -e PLUGIN_TOKEN=<token>                \
   -e PLUGIN_CERT=<cert>                  \
   -e PLUGIN_INSECURE=<true>              \
-  -e PLUGIN_DEPLOYMENT_NAME=<deployment> \
-  -e PLUGIN_CONTAINER_NAME=<container>   \
-  -e PLUGIN_NAMESPACE=<namespace>        \ 
+  -e PLUGIN_DEPLOYMENT_NAMES=<deployments> \
+  -e PLUGIN_CONTAINER_NAMES=<containers>   \
+  -e PLUGIN_NAMESPACES=<namespaces>        \ 
   -e PLUGIN_DOCKER_IMAGE=<image>         \
   -v $(pwd):$(pwd)                       \
   -w $(pwd)                              \
