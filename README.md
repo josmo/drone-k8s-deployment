@@ -7,6 +7,12 @@
 
 Drone plugin to update a deployment in k8s. For the usage information and a listing of the available options please take a look at [the docs](DOCS.md).
 
+## Versions
+
+This repo is using auto-tag from the drone-docker plugin meaning that
+1. master will always publish to 'latest' in docker hub peloton/drone-k8s-deployment
+2. tags will follow semver at the 1.0.0+ - initial 0.x.x may have breaking changes
+
 ## Binary
 
 Build the binary using `go build`:
