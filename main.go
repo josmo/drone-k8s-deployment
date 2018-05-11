@@ -63,13 +63,13 @@ func main() {
 
 func run(c *cli.Context) error {
 	plugin := Plugin{
-		URL:            c.String("url"),
-		Token:          c.String("token"),
-		Insecure:       c.Bool("insecure"),
+		URL:             c.String("url"),
+		Token:           c.String("token"),
+		Insecure:        c.Bool("insecure"),
 		DeploymentNames: c.StringSlice("deployment-names"),
 		ContainerNames:  c.StringSlice("container-names"),
 		NameSpaces:      c.StringSlice("namespaces"),
-		DockerImage:    c.String("docker-image"),
+		DockerImage:     c.String("docker-image"),
 	}
 	return plugin.Exec()
 }

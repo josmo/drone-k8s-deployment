@@ -12,13 +12,13 @@ import (
 )
 
 type Plugin struct {
-	URL            string
-	Token          string
-	Insecure       bool
+	URL             string
+	Token           string
+	Insecure        bool
 	DeploymentNames []string
 	ContainerNames  []string
 	NameSpaces      []string
-	DockerImage    string
+	DockerImage     string
 }
 
 func (p *Plugin) Exec() error {
@@ -43,7 +43,7 @@ func (p *Plugin) Exec() error {
 	if len(p.NameSpaces) > 0 {
 		namespaces = p.NameSpaces
 	}
-	log.Infof("Updating container(s): %v in deployment(s): %v in namespace(s): %v",p.ContainerNames, p.DeploymentNames, namespaces)
+	log.Infof("Updating container(s): %v in deployment(s): %v in namespace(s): %v", p.ContainerNames, p.DeploymentNames, namespaces)
 	for _, namespace := range namespaces {
 		log.Infof("Updating in namespace: %s", namespace)
 		deploymentsClient := clientset.AppsV1().Deployments(namespace)
@@ -79,6 +79,6 @@ func (p *Plugin) Exec() error {
 			log.Infof("Updated container(s): %v in deployment: %s", p.ContainerNames, deploymentName)
 		}
 	}
-	log.Infof("Updated container(s): %v in deployments: %v in namespaces: %v",p.ContainerNames, p.DeploymentNames, namespaces)
+	log.Infof("Updated container(s): %v in deployments: %v in namespaces: %v", p.ContainerNames, p.DeploymentNames, namespaces)
 	return nil
 }
