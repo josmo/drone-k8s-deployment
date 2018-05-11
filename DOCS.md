@@ -6,9 +6,9 @@ The following parameters are used to configure this plugin:
 - `token` - Token used to connect to the cluster
 - `cert` - cert to connect to cluster //Not implemented
 - `insecure` - allow for insecure cluster connection //Not verified
-- `deployment_name` - name of the deployment to update
-- `container_name` - container name in the deployment to update
-- `namespace` - namespace (will use default if not set)  
+- `deployment_names` - name(s) of the deployment to update
+- `container_names` - container(s) name in the deployment to update
+- `namespaces` - namespace(s) (will use default if not set)  
 - `docker_image` - new image to assign to container in the deployment, including tag (`drone/drone:latest`)
 
 
