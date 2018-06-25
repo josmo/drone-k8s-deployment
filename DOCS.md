@@ -10,6 +10,7 @@ The following parameters are used to configure this plugin:
 - `container_names` - container(s) name in the deployment to update
 - `namespaces` - namespace(s) (will use default if not set)  
 - `docker_image` - new image to assign to container in the deployment, including tag (`drone/drone:latest`)
+- `date_label` - label where the date of the deployment took place. Nice to use if using latest to deploy images
 
 
 The following is a sample k8s deployment configuration in your `.drone.yml` file:

@@ -54,6 +54,11 @@ func main() {
 			Usage:  "image to use",
 			EnvVar: "PLUGIN_DOCKER_IMAGE",
 		},
+		cli.StringFlag{
+			Name:   "date-label",
+			Usage:  "label name for the date updated",
+			EnvVar: "PLUGIN_DATE_LABEL",
+		},
 	}
 
 	if err := app.Run(os.Args); err != nil {
@@ -70,6 +75,7 @@ func run(c *cli.Context) error {
 		ContainerNames:  c.StringSlice("container-names"),
 		NameSpaces:      c.StringSlice("namespaces"),
 		DockerImage:     c.String("docker-image"),
+		DateLabel:       c.String("date-label"),
 	}
 	return plugin.Exec()
 }

@@ -9,6 +9,7 @@ import (
 	"k8s.io/client-go/kubernetes"
 	"k8s.io/client-go/rest"
 	"k8s.io/client-go/util/retry"
+	"time"
 )
 
 type Plugin struct {
@@ -19,6 +20,7 @@ type Plugin struct {
 	ContainerNames  []string
 	NameSpaces      []string
 	DockerImage     string
+	DateLabel       string
 }
 
 func (p *Plugin) Exec() error {
@@ -64,10 +66,23 @@ func (p *Plugin) Exec() error {
 					// Find the matching containers to update
 					for _, containerName := range p.ContainerNames {
 						if result.Spec.Template.Spec.Containers[i].Name == containerName {
+
 							log.Infof("Updating container: %s with image: %s", containerName, p.DockerImage)
 							result.Spec.Template.Spec.Containers[i].Image = p.DockerImage
 						}
 					}
+				}
+				if p.DateLabel != "" {
+					t := time.Now()
+					if result.Spec.Template.Annotations == nil {
+						m := map[string]string{
+							p.DateLabel: t.Format(time.RFC3339),
+						}
+						result.Spec.Template.Annotations = m
+					} else {
+						result.Spec.Template.Annotations[p.DateLabel] = t.Format(time.RFC3339)
+					}
+
 				}
 
 				_, updateErr := deploymentsClient.Update(result)
