@@ -22,7 +22,7 @@ func main() {
 		cli.StringFlag{
 			Name:   "url",
 			Usage:  "url to the k8s api",
-			EnvVar: "PLUGIN_URL",
+			EnvVar: "PLUGIN_URL, KUBERNETES_URL",
 		},
 		cli.StringFlag{
 			Name:   "token",
