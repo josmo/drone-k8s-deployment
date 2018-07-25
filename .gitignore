@@ -27,3 +27,6 @@ coverage.out
 drone-k8s-deployment
 
 *.idea
+
+release
+vendor

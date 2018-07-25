@@ -2,14 +2,21 @@ workspace:
   base: /go
   path: src/github.com/josmo/drone-k8s-deployment
 pipeline:
+  deps:
+    image: golang:1.10
+    pull: true
+    commands:
+      - go get -u github.com/golang/dep/cmd/dep
+      - dep ensure
+
   test:
-    image: golang:1.9
+    image: golang:1.10
     commands:
       - go vet
       - go test -cover -coverprofile=coverage.out
 
   build_linux_amd64:
-    image: golang:1.9
+    image: golang:1.10
     group: build
     environment:
       - GOOS=linux
@@ -19,7 +26,7 @@ pipeline:
       - go build -v -ldflags "-X main.build=${DRONE_BUILD_NUMBER}" -a -o release/linux/amd64/drone-k8s-deployment
 
   build_linux_arm64:
-    image: golang:1.9
+    image: golang:1.10
     group: build
     environment:
       - GOOS=linux
@@ -29,7 +36,7 @@ pipeline:
       - go build -v -ldflags "-X main.build=${DRONE_BUILD_NUMBER}" -a -o release/linux/arm64/drone-k8s-deployment
 
   build_linux_arm:
-    image: golang:1.9
+    image: golang:1.10
     group: build
     environment:
       - GOOS=linux
