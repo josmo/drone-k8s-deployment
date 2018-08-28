@@ -10,7 +10,7 @@ The following parameters are used to configure this plugin:
 - `container_names` - Container(s) name in the deployment to update
 - `namespaces` - Namespace(s) (will use default if not set)  
 - `docker_image` - New image to assign to container in the deployment, including tag (`drone/drone:latest`)
-- `date_label` - Label where the date of the deployment took place. Use it when you want to force container upgrading, even if you docker image tag has not changed.
+- `date_label` - Label where the date of the deployment took place. Use it when you want to force container upgrading, even if your docker image tag has not changed.
 
 
 The following is a sample k8s deployment configuration in your `.drone.yml` file:
@@ -60,7 +60,7 @@ pipeline:
     secrets: [kubernetes_url, kubernetes_token]
 ```
 
-If you want to force docker container upgrading, there is a hack which allows you to do this even if your image name/tag has not changed. Put to the data_label key ENV variable from Drone CI with a timestamp, such as this:
+If you want to force docker container upgrading, there is a hack which allows you to do this even if your image name/tag has not changed. Put to the data_label the text such as `deployment.drone.io/date-deployed`(could be any name you want) and it will be used for defining annotation with timestamp for Kubernetes deployment:
 
 ```yaml
 pipeline:
@@ -72,8 +72,7 @@ pipeline:
     container_names: mything
     namespaces: [mynamespace, anothernamspace]
     docker_image: drone/drone:latest
-    date_label: "${DRONE_BUILD_FINISHED}"
+    date_label: deployment.drone.io/date-deployed
     secrets: [kubernetes_url, kubernetes_token]
 ```
 
-The list of available Drone CI env variables you could find [here](http://docs.drone.io/environment-reference/)
