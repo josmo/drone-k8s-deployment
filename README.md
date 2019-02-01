@@ -1,6 +1,6 @@
 # drone-k8s-deployment
 
-[![Build Status](https://drone.pelo.tech/api/badges/josmo/drone-k8s-deployment/status.svg)](https://drone.pelo.tech/josmo/drone-k8s-deployment)
+[![Build Status](https://cloud.drone.io/api/badges/josmo/drone-k8s-deployment/status.svg)](https://cloud.drone.io/josmo/drone-k8s-deployment)
 [![Go Doc](https://godoc.org/github.com/josmo/drone-k8s-deployment?status.svg)](http://godoc.org/github.com/josmo/drone-k8s-deployment)
 [![Go Report](https://goreportcard.com/badge/github.com/josmo/drone-k8s-deployment)](https://goreportcard.com/report/github.com/josmo/drone-k8s-deployment)
 [![](https://images.microbadger.com/badges/image/peloton/drone-k8s-deployment.svg)](https://microbadger.com/images/peloton/drone-k8s-deployment "Get your own image badge on microbadger.com")
@@ -46,4 +46,3 @@ This repo is setup in a way that if you enable a personal drone server to build 
  
 * Build local ```DRONE_REPO_OWNER=josmo DRONE_REPO_NAME=drone-k8s-deployment drone exec```
 * on your server just make sure you have DOCKER_USERNAME, DOCKER_PASSWORD, and PLUGIN_REPO set as secrets
- 
